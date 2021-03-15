@@ -1,0 +1,73 @@
+<apex:page showheader="false" lightningStyleSheets="true">
+
+    <head>
+        <apex:slds />
+    </head>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <img class="slds-align_absolute-center" width="75px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFvnozDTgl2GGpduCisWzifEcEi37FEWCUYQ&usqp=CAU"/>
+            <span class="slds-align_absolute-center">Feel free to use our bank</span>
+        </div>
+        <div class="slds-col">
+            <img class="slds-align_absolute-center" width="75px" src="https://static.vecteezy.com/system/resources/previews/000/331/619/non_2x/medal-glyph-black-icon-vector.jpg"/>
+            <span class="slds-align_absolute-center">Be confident</span>
+        </div>
+        <div class="slds-col">
+            <img class="slds-align_absolute-center" width="75px" src="https://image.flaticon.com/icons/png/512/47/47847.png"/>
+            <span class="slds-align_absolute-center">Make progress</span>
+        </div>
+    </div>
+    <div class="slds-p-around--xx-large slds-text-longform">
+        <h2 class="slds-align_absolute-center slds-text-heading--medium">This is the heading for a section of text that you wish had spacing</h2>
+        <p>User centered design venture capital parallax latte viral thinker-maker-doer pitch deck experiential human-centered
+            design. Agile food-truck workflow latte bootstrapping workflow earned media cortado. Experiential sticky note
+            prototype prototype latte innovate venture capital co-working moleskine prototype disrupt personas. Driven viral
+            pitch deck fund entrepreneur moleskine experiential. Workflow SpaceTeam long shadow ship it SpaceTeam piverate
+            pitch deck 360 campaign cortado fund latte hacker.Bootstrapping integrate pair programming affordances agile
+            minimum viable product engaging viral disrupt responsive fund. Paradigm physical computing prototype Steve Jobs
+            agile cortado physical computing innovate. Pivot viral ship it personas engaging minimum viable product grok
+            actionable insight ship it parallax innovate long shadow pair programming personas. Innovate minimum viable product
+            ideate innovate affordances entrepreneur fund sticky note sticky note user story. Minimum viable product iterate
+            quantitative vs. qualitative quantitative vs. qualitative sticky note paradigm cortado prototype. Agile 360 campaign
+            entrepreneur personas waterfall is so 2000 and late grok innovate sticky note actionable insight. Driven grok
+            user story entrepreneur co-working waterfall is so 2000 and late viral food-truck food-truck hacker ideate big
+            data. Affordances personas integrate convergence actionable insight cortado physical computing iterate. Affordances
+            intuitive SpaceTeam earned media actionable insight latte entrepreneur workflow workflow sticky note parallax
+            360 campaign. Food-truck viral sticky note quantitative vs. qualitative disrupt pitch deck thinker-maker-doer
+            physical computing waterfall is so 2000 and late venture capital. Pitch deck viral earned media experiential
+            user centered design viral thought leader venture capital physical computing bootstrapping food-truck pitch deck.
+            Pitch deck big data venture capital engaging affordances long shadow experiential physical computing co-working
+            integrate. Pivot innovate entrepreneur ship it disrupt venture capital pair programming co-working parallax fund
+            engaging convergence affordances. Hacker responsive Steve Jobs thought leader hacker physical computing thought
+            leader user centered design paradigm entrepreneur. Affordances cortado thinker-maker-doer ideate paradigm bootstrapping
+            moleskine convergence grok cortado cortado.</p>
+        <ul>
+            <li>ship it</li>
+            <li>disrupt venture capital</li>
+            <li>engaging convergence</li>
+            <li>thinker-maker-doer</li>
+        </ul>
+        <h2 class="slds-text-heading--medium slds-align_absolute-center">Prototype and ideate</h2>
+        <p>Prototype ideate user centered design bootstrapping iterate user story experiential long shadow experiential thinker-maker-doer
+            convergence big data. Paradigm thinker-maker-doer sticky note user centered design waterfall is so 2000 and late
+            intuitive workflow thought leader. Long shadow Steve Jobs physical computing prototype long shadow ideate waterfall
+            is so 2000 and late user story thinker-maker-doer quantitative vs. qualitative intuitive.</p>
+        <h2 class="slds-text-heading--medium slds-align_absolute-center">User Story</h2>
+        <p>User story co-working ship it prototype hacker prototype thought leader pitch deck responsive. Long shadow user story
+            actionable insight venture capital engaging fund disrupt parallax parallax experiential pitch deck SpaceTeam
+            thought leader earned media. Grok pitch deck pitch deck grok convergence experiential intuitive intuitive prototype
+            latte 360 campaign responsive. Intuitive iterate sticky note venture capital earned media prototype cortado SpaceTeam
+            user story.</p>
+        <h2 class="slds-text-heading--medium slds-align_absolute-center">SpaceTeam</h2>
+        <p>Grok earned media cortado minimum viable product ship it disrupt human-centered design engaging responsive physical
+            computing big data. Quantitative vs. qualitative cortado SpaceTeam user centered design ship it moleskine cortado
+            entrepreneur thought leader sticky note workflow quantitative vs. qualitative. Human-centered design entrepreneur
+            integrate co-working driven minimum viable product SpaceTeam latte agile convergence quantitative vs. qualitative
+            user story.</p>
+        <h2 class="slds-text-heading--medium slds-align_absolute-center">Affordance</h2>
+        <p>Parallax ship it pair programming ideate parallax ship it affordances integrate physical computing co-working thought
+            leader cortado minimum viable product pitch deck. Thought leader engaging convergence 360 campaign convergence
+            Steve Jobs SpaceTeam piverate personas actionable insight viral. Viral prototype hacker parallax iterate big
+            data pair programming Steve Jobs responsive.</p>
+    </div>
+</apex:page>

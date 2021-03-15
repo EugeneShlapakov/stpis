@@ -1,0 +1,98 @@
+<apex:page controller="documentsRest" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false"
+    applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>JavaScript Maps Api</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <apex:slds />
+    </head>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.documentsRest.getDepartments}',
+                function (result, event) {
+                    if (event.status) {
+                        var table = document.createElement('table');
+                        table.className = 'slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover';
+                        var headerRow = document.createElement('tr');
+                        var headerColumnName = document.createElement('td');
+                        headerColumnName.setAttribute('scope', 'col');
+                        headerColumnName.setAttribute('class', 'slds-text-heading_label');
+                        var headerColumnAddress = document.createElement('td');
+                        headerColumnAddress.setAttribute('scope', 'col');
+                        headerColumnAddress.setAttribute('class', 'slds-text-heading_label');
+                        var headerColumnButton = document.createElement('td');
+                        headerColumnButton.setAttribute('scope', 'col');
+                        headerColumnButton.setAttribute('class', 'slds-text-heading_label');
+                        var Name = document.createTextNode('Название');
+                        headerColumnName.appendChild(Name);
+                        headerRow.appendChild(headerColumnName);
+                        var Address = document.createTextNode('Адрес');
+                        headerColumnAddress.appendChild(Address);
+                        headerRow.appendChild(headerColumnAddress);
+                        var Button = document.createTextNode('Расположение');
+                        headerColumnButton.appendChild(Button);
+                        headerRow.appendChild(headerColumnButton);
+                        table.appendChild(headerRow);
+                        for (let i = 0; i < result.length; i++) {
+                            var row = document.createElement('tr');
+                            var columnName = document.createElement('td');
+                            var columnBtn = document.createElement('td');
+                            var columnAdr = document.createElement('td');
+                            var Name = document.createTextNode(result[i].Name);
+                            var Addr = document.createTextNode(result[i].Address__c);
+                            var butn = document.createElement('button');
+                            butn.setAttribute('class', 'slds-button');
+                            butn.innerHTML = 'Карта';
+                            let lat = result[i].Office__Latitude__s;
+                            let lon = result[i].Office__Longitude__s;
+                            butn.onclick = function () { initMap(lat, lon) };
+                            columnName.appendChild(Name);
+                            columnAdr.appendChild(Addr);
+                            columnBtn.appendChild(butn);
+                            row.appendChild(columnName);
+                            row.appendChild(columnAdr);
+                            row.appendChild(columnBtn);
+                            table.appendChild(row);
+                        }
+                        var getDiv = document.getElementById('contact-list');
+                        getDiv.innerHTML = "";
+                        getDiv.appendChild(table);
+                    }
+                },
+                { escape: true }
+            )
+        });
+        let map;
+
+        function initMap(lat, lon) {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: lat, lng: lon },
+                zoom: 15,
+            });
+            new google.maps.Marker({
+                position: { lat: lat, lng: lon },
+                map,
+                title: "Department address",
+             });
+
+        }
+    </script>
+
+    <body>
+        <div class="slds-scope">
+            <div class="myapp">
+                <div id="contact-list" class="slds-p-vertical_medium"></div>
+            </div>
+            <div style="margin-left: auto; margin-right:auto; height: 500px; width:900px;" id="map"></div>
+        </div>
+        <script async="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFZZbZpk0dI_ylh_JUCTIzrxT8Y4sI2mc"></script>
+    </body>
+
+    </html>
+</apex:page>

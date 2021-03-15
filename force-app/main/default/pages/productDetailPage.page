@@ -1,0 +1,41 @@
+<apex:page controller="shopPageController" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false"
+    applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Salesforce Lightning Design System Trailhead Module</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+
+    <body>
+        <div class="slds-scope">
+            <div class="slds-text-heading_large slds-text-align_center">{!prodName}</div>
+            <div class="slds-grid">
+                <div style="height:500px" id="image-div" class="slds-col slds-size_1-of-2"></div>
+                <div style="height:500px; padding-top: 150px;" class="slds-col slds-size_1-of-2">
+                    <h2 class="slds-text-heading_medium">Description:</h2>
+                    <p>{!prodDesc}</p>
+                </div>
+            </div>
+            <div class="slds-align_absolute-center">
+                <a class="slds-button slds-button--neutral slds-button--small" href="https://curious-otter-5dyqs2-dev-ed--c.visualforce.com/apex/shopPage">Back to shopping</a>
+                <a class="slds-button slds-button_brand slds-button--small" href="#">Buy</a>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                var outputDivImg = document.getElementById('image-div');
+                var img = document.createElement('img');
+                img.src = "{!prodImgUrl}";
+                outputDivImg.appendChild(img);
+            })();
+        </script>
+    </body>
+
+    </html>
+</apex:page>

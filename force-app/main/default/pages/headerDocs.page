@@ -1,0 +1,42 @@
+<apex:page controller="documentsRest" showheader="false" lightningStyleSheets="true">
+
+    <head>
+        <apex:slds />
+    </head>
+    <div class="slds-context-bar">
+        <div class="slds-context-bar__primary">
+            <span class="slds-context-bar__label-action slds-context-bar__app-name">
+                <span class="slds-truncate" title="App Name">ESBank</span>
+            </span>
+        </div>
+        <nav class="slds-context-bar__secondary" role="navigation">
+            <ul class="slds-grid">
+                <li class="slds-context-bar__item">
+                    <a href="https://testtaskcommunitites-developer-edition.ap24.force.com/s/info" class="slds-context-bar__label-action" title="Menu Item">
+                        <span class="slds-truncate" title="Menu Item">Главная</span>
+                    </a>
+                </li>
+                <li class="slds-context-bar__item">
+                    <a href="https://testtaskcommunitites-developer-edition.ap24.force.com/s/" class="slds-context-bar__label-action" title="Home">
+                        <span class="slds-truncate" title="Home">Документы</span>
+                    </a>
+                </li>
+                <li class="slds-context-bar__item">
+                    <a href="https://testtaskcommunitites-developer-edition.ap24.force.com/s/departments" class="slds-context-bar__label-action" title="Menu Item">
+                        <span class="slds-truncate" title="Menu Item">Департаменты</span>
+                    </a>
+                </li>
+                <li class="slds-context-bar__item">
+                    <a href="https://testtaskcommunitites-developer-edition.ap24.force.com/s/currency" class="slds-context-bar__label-action" title="Menu Item">
+                        <span class="slds-truncate" title="Menu Item">Курсы Валют</span>
+                    </a>
+                </li>
+                <li class="slds-context-bar__item">
+                    <a href="https://testtaskcommunitites-developer-edition.ap24.force.com/s/contactus" class="slds-context-bar__label-action" title="Menu Item">
+                        <span class="slds-truncate" title="Menu Item">Поддержка</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</apex:page>

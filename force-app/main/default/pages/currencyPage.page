@@ -1,0 +1,59 @@
+<apex:page docType="html-5.0" controller="getCurrencyRate">
+    <apex:form style="font-size: 15px" >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                Date:
+                <apex:input lang="en-US" id="dateValue" type="date" value="{!dat}" />
+                <apex:outputPanel style="border-radius: 20px;" onclick="ShowRates()" styleClass="btn">Show rates</apex:outputPanel>
+                <apex:actionFunction name="ShowRates" action="{!showRatesDate}" rerender="fromTable">
+                    <apex:param name="dat" value="{!dat}" />
+                </apex:actionFunction>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="fromTable">
+            <apex:pageblockTable value="{!currList}" var="f">
+                <apex:column value="{!f.name}" headerValue="Name" />
+                <apex:column value="{!f.abbr}" headerValue="Abbr" />
+                <apex:column value="{!f.amount}" headerValue="Amount" />
+                <apex:column value="{!f.rate}" headerValue="Rate" />
+            </apex:pageblockTable>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="theForm" style="font-size: 15px" >
+        <apex:pageBlock id="theBlock" title="BYN to USD/EUR/GBP/RUB Converter">
+            <apex:pageBlockSection id="theSectionFirst">
+                <apex:selectList id="currId" value="{!selectedCurr}" size="1">
+                    <apex:selectOptions value="{!currOptionList}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="theSection">
+                <apex:inputText alt="BYN" id="inputAmount" value="{!unitAmount}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+                <apex:outputPanel style="border-radius: 20px;" onclick="changeOutput()" styleClass="btn">Count</apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="outputResult">
+                <apex:outputText id="outputCount" value=""></apex:outputText>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <script type="text/javascript">
+        function changeOutput() {
+            let xhr = new XMLHttpRequest();
+            let curr = document.getElementById("{!$Component.theForm.theBlock.theSectionFirst.currId}").value;
+            let url = 'https://www.nbrb.by/api/exrates/rates/' + curr + '?parammode=2';
+            xhr.open('GET', url);
+            console.log(curr);
+            console.log(url);
+            xhr.responseType = 'json';
+            xhr.send();
+            xhr.onload = function () {
+                let responseObj = xhr.response;
+                let rate = responseObj.Cur_Scale / responseObj.Cur_OfficialRate;
+                let amount = document.getElementById("{!$Component.theForm.theBlock.theSection.inputAmount}").value;
+                let result = amount * rate;
+                document.getElementById("{!$Component.theForm.theBlock.outputResult.outputCount}").innerHTML = 'The result of convertion is: ' + result.toFixed(2);
+            };
+        }
+    </script>
+</apex:page>

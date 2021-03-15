@@ -1,0 +1,122 @@
+<apex:page docType="html-5.0" controller="documentsRest" showheader="false" lightningStyleSheets="true" action="{!getAccsInit}">
+
+    <head>
+        <apex:slds />
+    </head>
+    <script>
+        function submitData() {
+            var name = document.getElementById('contact-fName').value;
+            var text = document.getElementById('contact-lName').value;
+            submitActionFunction(name, text);
+            location.reload();
+            alert('Документ успешно создан');
+        }
+    </script>
+    <script>
+        function delData(id) {
+            deleteRec(id);
+            location.reload();
+            alert('Документ успешно удален');
+        }
+    </script>
+    <div>
+        <apex:form style="font-size: 15px">
+            <apex:input type="text" value="{!searchTerm}" id="text-input-id-1" required="" />
+            <button style="margin-top:10px; margin-bottom:10px;" type="button" class="slds-button slds-button_brand" onclick="ShowRates()">Поиск</button>
+            <apex:actionFunction name="ShowRates" action="{!getAccsBySearchTerm}">
+            </apex:actionFunction>
+        </apex:form>
+    </div>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Name">Название</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Owner Name">Автор</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Created Date">Дата создания</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Status">Статус</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Department">Департамент</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Delete">Удалить</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <apex:repeat value="{!acc}" var="key">
+                <tr class="slds-hint-parent">
+                    <th data-label="Name" scope="row">
+                        <div class="slds-truncate" title="{!key.Name}">
+                            <a href="#" tabindex="-1">{!key.Name}</a>
+                        </div>
+                    </th>
+                    <td data-label="Owner Name">
+                        <div class="slds-truncate" title="{!key.Owner.Name}">
+                            <a href="#" tabindex="-1">{!key.Owner.Name}</a>
+                        </div>
+                    </td>
+                    <td data-label="Created Date">
+                        <div class="slds-truncate" title="{!key.CreatedDate}">{!key.CreatedDate}</div>
+                    </td>
+                    <td data-label="Status">
+                        <div class="slds-truncate" title="{!key.Status__c}">{!key.Status__c}</div>
+                    </td>
+                    <td data-label="Department">
+                        <div class="slds-truncate" title="{!key.Department__r.Name}">{!key.Department__r.Name}</div>
+                    </td>
+                    <td data-label="Delete">
+                        <button style="margin-top:10px; margin-bottom:10px;" class="slds-button slds-button_brand" onclick="delData('{!key.Id}')">Удалить</button>
+                    </td>
+                </tr>
+            </apex:repeat>
+        </tbody>
+    </table>
+    <div class="slds-scope ">
+        <!-- CREATE NEW ACCOUNT -->
+        <div aria-labelledby="newaccountform">
+            <!-- CREATE NEW ACCOUNT FORM -->
+            <form style="height: 100vh;" class="slds-form_stacked" id="add-account-form">
+                <!-- BOXED AREA -->
+                <fieldset style="width: 400px; height: auto;" class="slds-box slds-theme_default slds-container_small">
+                    <legend id="newaccountform" class="slds-text-heading_medium slds-p-vertical_medium">Создайте новый документ</legend>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="contact-fName">Name</label>
+                        <div class="slds-form-element__control">
+                            <input id="contact-fName" class="slds-input" type="text" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="contact-lName">Text</label>
+                        <div class="slds-form-element__control">
+                            <input id="contact-lName" class="slds-input" type="text" placeholder="Text" />
+                        </div>
+                    </div>
+                    <button onclick="submitData();" class="slds-button slds-button_brand slds-m-top_medium" type="button">Создать</button>
+                </fieldset>
+                <!-- / BOXED AREA -->
+            </form>
+            <!-- CREATE NEW ACCOUNT FORM -->
+        </div>
+        <!-- / CREATE NEW ACCOUNT -->
+    </div>
+    <apex:form >
+        <apex:actionFunction name="submitActionFunction" action="{!saveOrder}" reRender="">
+            <apex:param name="name" assignTo="{!contFirstName}" value="" />
+            <apex:param name="text" assignTo="{!contLastName}" value="" />
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form >
+        <apex:actionFunction name="deleteRec" action="{!delDoc}" reRender="">
+            <apex:param name="id" assignTo="{!recDelId}" value="" />
+        </apex:actionFunction>
+    </apex:form>
+
+</apex:page>

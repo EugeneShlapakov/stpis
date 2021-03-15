@@ -1,0 +1,15 @@
+<apex:page controller="erroePageController">
+    <apex:form id="formId">
+        <apex:pageMessages id="msgId"/>
+        <apex:pageBlock title="New Lead Record" id="pageBlockId">
+            <apex:pageBlockSection id="pageBlockSectionId" title="Lead Section">
+                <apex:inputField value="{!lead.FirstName}"></apex:inputField>
+                <apex:inputField value="{!lead.LastName}"></apex:inputField>
+                <apex:inputField value="{!lead.Email}"></apex:inputField>
+                <apex:inputField value="{!lead.Company}"></apex:inputField>
+            </apex:pageBlockSection>
+            <apex:commandButton value="Save" action="{!addNewLead}" reRender="formId">
+            </apex:commandButton>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

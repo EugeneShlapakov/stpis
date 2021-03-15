@@ -1,0 +1,94 @@
+<apex:page controller="shopPageController" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false"
+    applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Salesforce Lightning Design System Trailhead Module</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Contact" jsShorthand="ContactName" fields="FirstName, LastName, Email" />
+    </apex:remoteObjects>
+
+    <body>
+        <script>
+            function submitData() {
+                var cFname = document.getElementById('contact-fName').value;
+                var cLname = document.getElementById('contact-lName').value;
+                var cemail = document.getElementById('contact-email').value;
+                var amount = document.getElementById('product-amount').value;
+                submitActionFunction(cFname, cLname, cemail, amount);
+                location.href = "https://curious-otter-5dyqs2-dev-ed--c.visualforce.com/apex/shopPage";
+                alert('Order created succesfully');
+            }
+        </script>
+        <div class="slds-scope ">
+            <!-- CREATE NEW ACCOUNT -->
+            <div aria-labelledby="newaccountform">
+                <!-- CREATE NEW ACCOUNT FORM -->
+                <form style="height: 100vh;" class="slds-form_stacked slds-align_absolute-center" id="add-account-form">
+                    <!-- BOXED AREA -->
+                    <fieldset style="width: 400px; height: auto;" class="slds-box slds-theme_default slds-container_small">
+                        <legend id="newaccountform" class="slds-text-heading_medium slds-p-vertical_medium">Make new order</legend>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="contact-fName">First Name</label>
+                            <div class="slds-form-element__control">
+                                <input id="contact-fName" class="slds-input" type="text" placeholder="First Name" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="contact-lName">Last Name</label>
+                            <div class="slds-form-element__control">
+                                <input id="contact-lName" class="slds-input" type="text" placeholder="Last Name" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="contact-email">Email</label>
+                            <div class="slds-form-element__control">
+                                <input id="contact-email" class="slds-input" type="text" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="contact-email">Product Name</label>
+                            <div class="slds-form-element__control">
+                                <input id="product-name" class="slds-input" type="text" value="{!prodName}" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="product-price">Price</label>
+                            <div class="slds-form-element__control">
+                                <input id="product-price" class="slds-input" type="text" value="{!prodPrice} $" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="product-amount">Amount</label>
+                            <div class="slds-form-element__control">
+                                <input id="product-amount" class="slds-input" type="text" placeholder="Amount" />
+                            </div>
+                        </div>
+                        <button onclick="submitData();" class="slds-button slds-button_brand slds-m-top_medium" type="button">Create Order</button>
+                    </fieldset>
+                    <!-- / BOXED AREA -->
+                </form>
+                <!-- CREATE NEW ACCOUNT FORM -->
+            </div>
+            <!-- / CREATE NEW ACCOUNT -->
+        </div>
+        <apex:form >
+            <apex:actionFunction name="submitActionFunction" action="{!saveOrder}" reRender="">
+                <apex:param name="cFname" assignTo="{!contFirstName}" value="" />
+                <apex:param name="cLname" assignTo="{!contLastName}" value="" />
+                <apex:param name="cemail" assignTo="{!contEmail}" value="" />
+                <apex:param name="amount" assignTo="{!orderAmount}" value="" />
+            </apex:actionFunction>
+        </apex:form>
+    </body>
+
+    </html>
+</apex:page>

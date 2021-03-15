@@ -1,0 +1,143 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Salesforce Lightning Design System Trailhead Module</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Product_Table__c" jsShorthand="Product" fields="Name,Product_Description__c,Image_Url__c"/>
+    </apex:remoteObjects>
+
+    <body>
+        <!-- REQUIRED SLDS WRAPPER -->
+        <div class="slds-scope">
+            <!-- MASTHEAD -->
+            <p class="slds-text-heading_label slds-m-bottom_small">
+                Salesforce Lightning Design System Trailhead Module
+            </p>
+            <!-- / MASTHEAD -->
+            <!-- PAGE HEADER -->
+            <div class="slds-page-header" role="banner">
+                <div class="slds-grid">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <!-- HEADING AREA -->
+                        <p class="slds-text-title_caps slds-line-height_reset">Accounts</p>
+                        <h1 class="slds-page-header__title slds-truncate" title="My Accounts">My Accounts</h1>
+                        <!-- / HEADING AREA -->
+                    </div>
+                    <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <button class="slds-button slds-button_neutral">New Account</button>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-align-bottom slds-p-top_small">
+                        <p class="slds-text-body_small">COUNT items</p>
+                    </div>
+                </div>
+            </div>
+            <!-- / PAGE HEADER -->
+            <!-- PRIMARY CONTENT WRAPPER -->
+            <div class="myapp">
+                <!-- ACCOUNT LIST TABLE -->
+                <div id="account-list" class="slds-p-vertical_medium"></div>
+                <!-- / ACCOUNT LIST TABLE -->
+            </div>
+            <!-- / PRIMARY CONTENT WRAPPER -->
+            <!-- FOOTER -->
+            <footer role="contentinfo" class="slds-p-around_large">
+                <!-- LAYOUT GRID -->
+                <div class="slds-grid slds-grid_align-spread">
+                    <p class="slds-col">Salesforce Lightning Design System Example</p>
+                    <p class="slds-col">&copy; Your Name Here</p>
+                </div>
+                <!-- / LAYOUT GRID -->
+            </footer>
+            <!-- / FOOTER -->
+        </div>
+        <!-- / REQUIRED SLDS WRAPPER -->
+        <!-- JAVASCRIPT -->
+        <script>
+            (function () {
+                var product = new SObjectModel.Product_Table__c();
+                var outputDiv = document.getElementById('account-list');
+                var updateOutputDiv = function () {
+                    product.retrieve(
+                        { limit: 10 },
+                        function (error, records) {
+                            if (error) {
+                                alert(error.message);
+                            } else {
+                                // create data table
+                                var dataTable = document.createElement('table');
+                                dataTable.className = 'slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover';
+                                // add header row
+                                var tableHeader = dataTable.createTHead();
+                                var tableHeaderRow = tableHeader.insertRow();
+                                var tableHeaderRowCell1 = tableHeaderRow.insertCell(0);
+                                tableHeaderRowCell1.appendChild(document.createTextNode('Product name'));
+                                tableHeaderRowCell1.setAttribute('scope', 'col');
+                                tableHeaderRowCell1.setAttribute('class', 'slds-text-heading_label');
+                                var tableHeaderRowCell2 = tableHeaderRow.insertCell(1);
+                                tableHeaderRowCell2.appendChild(document.createTextNode('Product description'));
+                                tableHeaderRowCell2.setAttribute('scope', 'col');
+                                tableHeaderRowCell2.setAttribute('class', 'slds-text-heading_label');
+                                var tableHeaderRowCell3 = tableHeaderRow.insertCell(2);
+                                tableHeaderRowCell3.appendChild(document.createTextNode('Image'));
+                                tableHeaderRowCell3.setAttribute('scope', 'col');
+                                tableHeaderRowCell3.setAttribute('class', 'slds-text-heading_label');
+                                var tableHeaderRowCell4 = tableHeaderRow.insertCell(3);
+                                tableHeaderRowCell4.appendChild(document.createTextNode('Order'));
+                                tableHeaderRowCell4.setAttribute('scope', 'col');
+                                tableHeaderRowCell4.setAttribute('class', 'slds-text-heading_label');
+                                // build table body
+                                var tableBody = dataTable.appendChild(document.createElement('tbody'))
+                                var dataRow, dataRowCell1, dataRowCell2, recordName, recordId;
+                                records.forEach(function (record) {
+                                    dataRow = tableBody.insertRow();
+                                    dataRowCell1 = dataRow.insertCell(0);
+                                    recordNameLink = document.createElement('a');
+                                    recordName = document.createTextNode(record.get('Name'));
+                                    recordNameLink.appendChild(recordName);
+                                    recordNameLink.title = record.get('Name');
+                                    dataRowCell1.appendChild(recordNameLink);
+                                    dataRowCell2 = dataRow.insertCell(1);
+                                    recordId = document.createTextNode(record.get('Product_Description__c'));
+                                    dataRowCell2.appendChild(recordId);
+                                    dataRowCell2.className = 'slds-cell-wrap';
+                                    dataRowCell3 = dataRow.insertCell(2);
+                                    prodImage = new Image();
+                                    prodImage.src = record.get('Image_Url__c');
+                                    dataRowCell3.appendChild(prodImage);
+                                    dataRowCell4 = dataRow.insertCell(3);
+                                    buyBtn = document.createElement('a');
+                                    buyBtn.innerHTML = 'Buy';
+                                    recordId = record.get('Id');
+                                    recordNameLink.href = 'https://curious-otter-5dyqs2-dev-ed--c.visualforce.com/apex/productDetailPage?id=' + recordId;
+                                    buyBtn.href='https://curious-otter-5dyqs2-dev-ed--c.visualforce.com/apex/orderPage?id=' + recordId;
+                                    buyBtn.className = 'slds-button slds-button--neutral slds-button--small';
+                                    dataRowCell4.appendChild(buyBtn);
+                                });
+                                if (outputDiv.firstChild) {
+                                    // replace table if it already exists
+                                    // see later in tutorial
+                                    outputDiv.replaceChild(dataTable, outputDiv.firstChild);
+                                } else {
+                                    outputDiv.appendChild(dataTable);
+                                }
+                            }
+                        }
+                    );
+                }
+                updateOutputDiv();
+            })();
+        </script>
+        <!-- / JAVASCRIPT -->
+    </body>
+
+    </html>
+</apex:page>
